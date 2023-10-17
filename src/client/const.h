@@ -151,13 +151,17 @@ namespace Otc
     };
 
     enum Skill {
-        Fist = 0,
+        Dagger = 0,
         Club,
         Sword,
         Axe,
         Distance,
         Shielding,
-        Fishing,
+        Arcane,
+        Mining,
+        Tailoring,
+        Blacksmithing,
+        Runecraft,
         CriticalChance,
         CriticalDamage,
         LifeLeechChance,

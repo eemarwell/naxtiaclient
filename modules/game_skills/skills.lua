@@ -213,11 +213,11 @@ function refresh()
   onSpeedChange(player, player:getSpeed())
 
   local hasAdditionalSkills = g_game.getFeature(GameAdditionalSkills)
-  for i = Skill.Fist, Skill.ManaLeechAmount do
+  for i = Skill.Dagger, Skill.ManaLeechAmount do
     onSkillChange(player, i, player:getSkillLevel(i), player:getSkillLevelPercent(i))
     onBaseSkillChange(player, i, player:getSkillBaseLevel(i))
 
-    if i > Skill.Fishing then
+    if i > Skill.Arcane then
       toggleSkill('skillId'..i, hasAdditionalSkills)
     end
   end

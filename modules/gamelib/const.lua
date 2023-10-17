@@ -46,19 +46,23 @@ Directions = {
 }
 
 Skill = {
-  Fist = 0,
+  Dagger = 0,
   Club = 1,
   Sword = 2,
   Axe = 3,
   Distance = 4,
   Shielding = 5,
-  Fishing = 6,
+  Arcane = 6,
   CriticalChance = 7,
   CriticalDamage = 8,
   LifeLeechChance = 9,
   LifeLeechAmount = 10,
   ManaLeechChance = 11,
-  ManaLeechAmount = 12
+  ManaLeechAmount = 12,
+  Mining = 13,
+	Tailoring = 14,
+	Blacksmithing = 15,
+	Runecraft = 16,
 }
 
 North = Directions.North
