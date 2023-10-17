@@ -121,7 +121,7 @@ MiniWindow
     SkillButton
       id: magiclevel
       SkillNameLabel
-        !text: tr('Magic Level')
+        !text: tr('Profane Level')
       SkillValueLabel
       SkillPercentPanel
         background-color: red
@@ -129,7 +129,7 @@ MiniWindow
     SkillButton
       id: skillId0
       SkillNameLabel
-        !text: tr('Fist Fighting')
+        !text: tr('Dagger Fighting')
       SkillValueLabel
       SkillPercentPanel
 
@@ -171,7 +171,7 @@ MiniWindow
     SkillButton
       id: skillId6
       SkillNameLabel
-        !text: tr('Fishing')
+        !text: tr('Arcane Level')
       SkillValueLabel
       SkillPercentPanel
 
@@ -210,3 +210,31 @@ MiniWindow
       SkillNameLabel
         !text: tr('Mana Leech Amount')
       SkillValueLabel
+
+    SkillButton
+      id: skillId13
+      SkillNameLabel
+        !text: tr('Mining Level')
+      SkillValueLabel
+      SkillPercentPanel
+
+    SkillButton
+      id: skillId14
+      SkillNameLabel
+        !text: tr('Tailoring Level')
+      SkillValueLabel
+      SkillPercentPanel
+
+    SkillButton
+      id: skillId15
+      SkillNameLabel
+        !text: tr('Blacksmithing Level')
+      SkillValueLabel
+      SkillPercentPanel
+
+    SkillButton
+      id: skillId16
+      SkillNameLabel
+        !text: tr('Runecraft Level')
+      SkillValueLabel
+      SkillPercentPanel
