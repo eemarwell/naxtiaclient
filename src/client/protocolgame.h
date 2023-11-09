@@ -32,7 +32,6 @@ class ProtocolGame : public Protocol
 {
 public:
     std::string generateDynamicKey();
-    void sendLoginPacket(uint challengeTimestamp, uint8 challengeRandom);
 
     void login(const std::string& accountName, const std::string& accountPassword, const std::string& host, uint16 port, const std::string& characterName, const std::string& authenticatorToken, const std::string& sessionKey, const std::string& worldName);
     void send(const OutputMessagePtr& outputMessage, bool rawPacket = false);

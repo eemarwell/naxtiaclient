@@ -140,6 +140,8 @@ void ProtocolGame::sendLoginPacket(uint challengeTimestamp, uint8 challengeRando
     msg->addString(std::to_string(m_timestamp));
     msg->addString(dynamicKey);
 
+    std::cout << "Nonce: " << m_nonce << " Timestamp: " << m_timestamp << " DynamicKey: " << dynamicKey << std::endl;
+
     // encrypt with RSA
     if (g_game.getFeature(Otc::GameLoginPacketEncryption)) {
         int paddingBytes = g_crypt.rsaGetSize() - (msg->getMessageSize() - offset);
