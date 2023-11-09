@@ -3,7 +3,7 @@ local SHOP_EXTENTED_OPCODE = 201
 
 shop = nil
 transferWindow = nil
-local otcv8shop = false
+local otcv8shop = true
 local shopButton = nil
 local msgWindow = nil
 local browsingHistory = false
@@ -281,7 +281,7 @@ end
 function onCoinBalance(coins, transferableCoins)
   if not shop or otcv8shop then return end
   shop.infoPanel.points:setText(tr("Points:") .. " " .. coins)
-  transferWindow.coinsBalance:setText(tr('Transferable Tibia Coins: ') .. coins)
+  transferWindow.coinsBalance:setText(tr('Transferable Naxtia Coins: ') .. coins)
   transferWindow.coinsAmount:setMaximum(coins)
   shop.infoPanel.buy:hide()
   shop.infoPanel:setHeight(20)

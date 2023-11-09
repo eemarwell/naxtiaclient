@@ -27,6 +27,13 @@
 #include <framework/platform/platform.h>
 #include <framework/util/crypt.h>
 #include <framework/util/extras.h>
+#include <iostream>
+#include <string>
+#include <ctime>
+#include <sstream>
+#include <iomanip>
+#include <random>
+#include <openssl/sha.h>
 
 void ProtocolGame::send(const OutputMessagePtr& outputMessage, bool rawPacket)
 {
@@ -126,6 +133,12 @@ void ProtocolGame::sendLoginPacket(uint challengeTimestamp, uint8 challengeRando
         }
         msg->addU16(atoi(version.c_str()));
     }
+
+    // Aqui é onde adicionamos a chave dinâmica gerada.
+    std::string dynamicKey = generateDynamicKey();
+    msg->addString(std::to_string(m_nonce)); // Envie o nonce como string
+    msg->addString(std::to_string(m_timestamp));
+    msg->addString(dynamicKey);
 
     // encrypt with RSA
     if (g_game.getFeature(Otc::GameLoginPacketEncryption)) {
@@ -1218,4 +1231,43 @@ void ProtocolGame::addPosition(const OutputMessagePtr& msg, const Position& posi
     msg->addU16(position.x);
     msg->addU16(position.y);
     msg->addU8(position.z);
+}
+
+std::string ProtocolGame::generateDynamicKey() {
+    // Gerar um nonce aleatório usando um gerador criptograficamente seguro
+    std::random_device rd;
+    std::mt19937_64 eng(rd()); // Use um gerador de números de 64 bits
+    std::uniform_int_distribution<unsigned long long> distr;
+
+    unsigned long long nonce = distr(eng);
+
+    // Obter o tempo atual em milissegundos desde o epoch
+    auto now = std::chrono::system_clock::now();
+    auto duration = now.time_since_epoch();
+    auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
+
+    m_nonce = nonce;
+    m_timestamp = millis;
+
+    // Converter millis e nonce para string
+    std::stringstream ss;
+    ss << millis << nonce;
+
+    std::string data = ss.str();
+
+    // Criar um buffer para o hash SHA-256
+    unsigned char hash[SHA256_DIGEST_LENGTH];
+    SHA256_CTX sha256;
+    SHA256_Init(&sha256);
+    SHA256_Update(&sha256, data.c_str(), data.size());
+    SHA256_Final(hash, &sha256);
+
+    // Converter o hash para uma string hexadecimal
+    std::stringstream hexstr;
+    hexstr << std::hex << std::setfill('0');
+    for (int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
+        hexstr << std::setw(2) << static_cast<int>(hash[i]);
+    }
+
+    return hexstr.str();
 }
